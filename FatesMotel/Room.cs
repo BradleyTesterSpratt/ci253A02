@@ -11,47 +11,88 @@ namespace FatesMotel
     {
 
         private int vTemperature;
-        private HashSet<int> vNeighbors;
-        enum vState { SAFE, DANGER, SMOULDER, FIRE, BURNEDOUT };
-        Boolean vHeatUp;
+        private HashSet<Room> vNeighbors;
+        enum vState { SAFE, DANGER, SMOULDER, FIRE, BURNEDOUT};
+        private Boolean vHeatUp;
 
-
+    
         public Room(int RoomID)
         {
             vLocationID = RoomID;
-            vTemperature = 0;
-            vNeighbors = new HashSet<int>();
+            vTemperature = 1;
+            vNeighbors = new HashSet<Room>();
             vLocationName = vLocationID.ToString();
+            vHeatUp = false;
         }
 
-        public void mSetNeighbors(int RoomID)
+        public void mSetNeighbors(Room neighbor)
         {
-            if (RoomID == vLocationID-100 || 
-                RoomID == vLocationID + 100 || 
-                RoomID == vLocationID - 1 || 
-                RoomID == vLocationID + 1)
+            if (neighbor.vLocationID == vLocationID-100 ||
+                neighbor.vLocationID == vLocationID + 100 ||
+                neighbor.vLocationID == vLocationID - 1 ||
+                neighbor.vLocationID == vLocationID + 1)
             {
-                vNeighbors.Add(RoomID);
+                vNeighbors.Add(neighbor);
             }
         }
 
-        public void mGetNeighbors()
+        /* method only really suitable to check that 
+         * motel is populating correctly
+         * no other practical uses
+         */
+        public void mPrintNeighbors()
         {
-            Console.Write(" is neighbored by ");
-
-            foreach (int vNeighborID in vNeighbors)
+            Console.Write("Room "+ vLocationID + " is neighbored by ");
+            for (int n=0; n<=vNeighbors.Count;n++)
             {
-                Console.Write("Room " + vNeighborID + ", ");
+                if (n==(vNeighbors.Count-2))
+                {
+                    Console.Write("Room " + vNeighbors.ElementAt<Room>(n).vLocationID);
+                }
+                else if (n < (vNeighbors.Count - 1))
+                {
+                    Console.Write("Room " + vNeighbors.ElementAt<Room>(n).vLocationID + ", ");
+                }
+                else if (n == (vNeighbors.Count - 1))
+                {
+                    Console.Write(" and Room " +  vNeighbors.ElementAt<Room>(n).vLocationID + ".");
+                }
             }
             Console.WriteLine();
-                
         }
 
-        public void mCanBurn(short Temperature)
+        public void mHeatUp()
         {
-
+            vHeatUp = true;
         }
 
+        private void mGetNeighbors()
+        {
+            //check if the room can affect other rooms
+            if (vTemperature >= 150)
+            {
+                foreach (Room neighbor in vNeighbors)
+                {
+                    //check the other room is not SAFE
+                    if (neighbor.vTemperature>0)
+                    {
+                        neighbor.mHeatUp();
+                    }
+                }
+            }
+        }
 
+        private void mBurn()
+        {
+            //increase temperature
+        }
+        public void mOnTick()
+        {
+            if (vHeatUp == true)
+            {
+                mGetNeighbors();
+                mBurn();
+            }
+        }
     }
 }
