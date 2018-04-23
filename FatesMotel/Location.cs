@@ -12,12 +12,12 @@ namespace FatesMotel
         protected int vLocationID;
         protected string vLocationName;
 
-        public int mGetID()
+        public int GetID()
         {
             return vLocationID;
         }
 
-        public string mGetName()
+        public string GetName()
         {
             return vLocationName;
         }

@@ -8,11 +8,30 @@ namespace FatesMotel
 {
     class Game
     {
-        public int RefreshRate = (int)GameSpeed.FAST;
+        private int RefreshRate;
+        private Motel vMotel;
+        public Game (Motel motel, GameSpeed speed)
+        {
+            vMotel = motel;
+            RefreshRate = (int)speed;
 
+        }
         public void TickTock(Object data)
         {
-            Console.WriteLine("The Next Tick");
+            //Console.WriteLine("The Next Tick");
+            foreach (Location room in vMotel.GetRooms())
+            {
+                if (room.GetType() == typeof(Room))
+                {
+                    ((Room)room).GetNeighbors();
+                    ((Room)room).OnTick();
+                }
+            }
         }
+        public int GetRefreshRate()
+        {
+            return RefreshRate;
+        }
+
     }
 }

@@ -10,26 +10,25 @@ namespace FatesMotel
     {
         private double vRooms;
         private int vFloors;
-        //should this be public? or accessor methods?
-        public HashSet<Location> vRoomList = new HashSet<Location>();
+        private HashSet<Location> vRoomList = new HashSet<Location>();
        
 
         public Motel(double rooms, int floors)
         {
             vRooms = rooms;
             vFloors = floors;
-            mPopulateMotel();
-            mAssignNeighbors();
+            PopulateMotel();
+            AssignNeighbors();
         }
 
-        private void mPopulateMotel()
+        private void PopulateMotel()
         {
             vRoomList.Add(new Station(000, "Station"));
             int vRoomNum = 0;
             int vCurrentFloor = 1;
+            double vRoomsPerFloor = Math.Ceiling(vRooms / vFloors);
             for (int n = 0; n < vRooms; n++)
-            {
-                double vRoomsPerFloor = Math.Ceiling(vRooms / vFloors);
+            { 
                 if (vRoomNum >= vRoomsPerFloor)
                 {
                     vCurrentFloor += 1;
@@ -39,9 +38,14 @@ namespace FatesMotel
                 vRoomList.Add(new Room(vRoomNum + vFloorNo));
                 vRoomNum += 1;
             }
+            Random vRand = new Random();
+
+            Room vBurningRoom = (Room)vRoomList.ElementAt(vRand.Next(0, (int)vRooms - 1));
+            vBurningRoom.HeatUp();
+            vBurningRoom.InitialBurn();
         }
 
-        private void mAssignNeighbors()
+        private void AssignNeighbors()
         {
             for (int n = 0; n < vRoomList.Count; n++)
             {
@@ -52,12 +56,17 @@ namespace FatesMotel
                     {
                         if (room.GetType() == typeof(Room))
                         {
-                            vCurrentLocation.mSetNeighbors((Room)room);
+                            vCurrentLocation.SetNeighbors((Room)room);
                         }
                     }
-                    vCurrentLocation.mPrintNeighbors();
+                    vCurrentLocation.PrintNeighbors();
                 }
             }
          }
+
+        public HashSet<Location> GetRooms()
+        {
+            return vRoomList;
+        }
     }
 }
