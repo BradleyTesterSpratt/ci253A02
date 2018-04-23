@@ -13,6 +13,12 @@ namespace FatesMotel
             Motel vMotel = new Motel(10, 2);            
             Console.ReadKey();
 
+
+
+            Game g = new Game();
+            TimerCallback timerCallBack = g.TickTock;
+            Timer tmr = new Timer(timerCallBack, null, 1000, g.RefreshRate);
+
         }
     }
 }
