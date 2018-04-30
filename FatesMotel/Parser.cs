@@ -10,7 +10,7 @@ namespace FatesMotel
     {
         public Command getCommand()
         {
-            string inputLine = "";
+            string inputLine = "> ";
             inputLine = Console.ReadLine();
             String[] values = inputLine.Split(' ', '\n');
             if (CommandWords.isCommand(values[0]))
