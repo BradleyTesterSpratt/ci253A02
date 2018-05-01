@@ -19,6 +19,8 @@ namespace FatesMotel
         private State vCurrentState;
         private Location vCurrentLocation;
 
+        public object VCurrentLocation { get; private set; }
+
         public Engine(Location location, int engineID)
         {
             vEngineID = engineID;
@@ -49,27 +51,32 @@ namespace FatesMotel
 
         }
 
-        public void Move()
+        public void Move(Location vDestination)
         {
-            VCurrentRoom.getType();
-            EngineState = Engine.ONCALL;
-
-
+            VCurrentLocation.GetType();
+            SetState();
         }
 
         private void Extinguish()
         {
-            //check coolant level
-            //if room can cool down 
-            //cool by (set) tick
-            //reduce extinguish level
-            //room temp down 1 state?
 
-            else
+            /*check coolant level
+            /if room can cool down 
+            /cool by (set) tick
+            /reduce extinguish level
+            /room temp down 1 state?
+            */
+            if (vCoolantLevel >= 40)
             {
-                Engine.StateEmpty
+                vCoolantLevel -= 40;
+
+
+                 else if (vCoolantLevel <= 39)
+                 {
                 Console.WriteLine("Engine empty");
-                
+                 }
+           
+
             }
 
 
@@ -77,11 +84,17 @@ namespace FatesMotel
 
         private void Refill()
         {
-            if (vCurrentLocation == Station)
-            {
-                vCoolantLevel = full vCoolantLevel;
-                Console.WriteLine("Engine refilled");
-            }
+            //if (vCurrentLocation == Station)
+
+            // if coolant less than full
+            // add x coolant
+
+            //if coolant greater than full
+            //set to full
+            Console.WriteLine("Engine refilled");
+
+
+            
 
             else
             {
@@ -89,17 +102,29 @@ namespace FatesMotel
             }
         }
 
-        }
+    }
 
-        private void Report()
+    public void Report()
+    {
+        GetCoolant();
+        Room currentRoom = (Room)vCurrentLocation;
+        currentRoom.getState();
+    }
+
+    public void OnTick()
+    {
+         SetState();
+
+        if (vCurrentState == State.ONCALL)
+
         {
-
+            Extinguish();
         }
 
-        public void OnTick()
-        {
-            SetState();
-            //if state, Extinguished or Refill
-        }
+        //if state is ONCALL
+        //if state is STATIONED refill
+        //if STATE is FREE do nothing?
     }
 }
+
+
