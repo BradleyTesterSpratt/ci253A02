@@ -8,6 +8,6 @@ namespace FatesMotel
 {
     public enum GameSpeed
     {
-        SLOW = 10000, AVERAGE = 5000, FAST = 1000, SUPERFAST = 500
+        SLOW = 10000, AVERAGE = 5000, FAST = 2000, SUPERFAST = 1000, IMPOSSIBLE = 500
     }
 }

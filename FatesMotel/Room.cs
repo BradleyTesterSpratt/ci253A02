@@ -12,7 +12,7 @@ namespace FatesMotel
 
         private int vTemperature;
         private HashSet<Room> vNeighbors;
-        enum State
+        public enum State
         {
             SAFE,
             DANGER,
@@ -102,12 +102,11 @@ namespace FatesMotel
             {
                 GetNeighbors();
                 Burn();
-                GetState();
+                SetState();
             }
         }
 
-        //change to Switch?
-        public void GetState()
+        private void SetState()
         {
             if (vTemperature >= 0 && vTemperature < 150)
             {
@@ -153,6 +152,11 @@ namespace FatesMotel
         public void InitialBurn()
         {
             vTemperature=150;
+        }
+
+        public State GetState()
+        {
+            return vCurrentState;
         }
     }
 }
