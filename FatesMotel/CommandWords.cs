@@ -9,7 +9,7 @@ namespace FatesMotel
     class CommandWords
     {
 
-        private static String[] validCommands = { "quit", "help", "room", "list", "report", "clear", "engine", "refill", "go"};
+        private static String[] validCommands = { "quit", "help", "room", "list", "report", "clear", "engine", "recall", "refill", "go"};
         public String[] ValidCommands { get { return validCommands; } }
 
         public static Boolean isCommand(String command)
