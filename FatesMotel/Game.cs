@@ -14,18 +14,19 @@ namespace FatesMotel
         {
             vMotel = motel;
             RefreshRate = (int)speed;
-
         }
         public void TickTock(Object data)
         {
-            //Console.WriteLine("The Next Tick");
             foreach (Location room in vMotel.GetRooms())
             {
                 if (room.GetType() == typeof(Room))
                 {
-                    ((Room)room).GetNeighbors();
                     ((Room)room).OnTick();
                 }
+            }
+            if (vMotel.GameOver() == true)
+            {
+                Console.WriteLine("GAME OVER");
             }
         }
         public int GetRefreshRate()

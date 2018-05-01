@@ -40,7 +40,8 @@ namespace FatesMotel
             }
             Random vRand = new Random();
 
-            Room vBurningRoom = (Room)vRoomList.ElementAt(vRand.Next(0, (int)vRooms - 1));
+            //start random no from 1, to skip station, which is always 0
+            Room vBurningRoom = (Room)vRoomList.ElementAt(vRand.Next(1, (int)vRooms - 1));
             vBurningRoom.HeatUp();
             vBurningRoom.InitialBurn();
         }
@@ -59,7 +60,8 @@ namespace FatesMotel
                             vCurrentLocation.SetNeighbors((Room)room);
                         }
                     }
-                    vCurrentLocation.PrintNeighbors();
+                    //debug only command
+                    //vCurrentLocation.PrintNeighbors();
                 }
             }
          }
@@ -67,6 +69,28 @@ namespace FatesMotel
         public HashSet<Location> GetRooms()
         {
             return vRoomList;
+        }
+
+        public bool GameOver()
+        {
+            bool vGameOver=false;
+            for (int n = 0; n < vRoomList.Count; n++)
+            {
+                if (vRoomList.ElementAt(n).GetType() == typeof(Room))
+                {
+                    Room vCurrentLocation = (Room)vRoomList.ElementAt(n);
+                    if (vCurrentLocation.GetState() == Room.State.DANGER || vCurrentLocation.GetState() == Room.State.SMOULDER || vCurrentLocation.GetState() == Room.State.FIRE)
+                    {
+                        n = vRoomList.Count;
+                        vGameOver = false;
+                    }
+                    else
+                    {
+                        vGameOver = true;
+                    }
+                }
+            }
+            return vGameOver;
         }
     }
 }
