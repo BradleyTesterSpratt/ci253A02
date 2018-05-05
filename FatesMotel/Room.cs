@@ -29,7 +29,7 @@ namespace FatesMotel
             vLocationID = RoomID;
             vTemperature = 1;
             vNeighbors = new HashSet<Room>();
-            vLocationName = vLocationID.ToString();
+            vLocationName = "Room " + vLocationID.ToString();
             vHeatUp = false;
         }
 
@@ -73,6 +73,13 @@ namespace FatesMotel
         {
             vHeatUp = true;
         }
+        public bool Extinguished()
+        {
+            if (vTemperature<=0)
+            { return true; }
+            else
+            { return false; }
+        }
 
         private void GetNeighbors()
         {
@@ -81,11 +88,7 @@ namespace FatesMotel
             {
                 foreach (Room neighbor in vNeighbors)
                 {
-                    //check the other room is not SAFE
-                    if (neighbor.vTemperature>0)
-                    {
-                        neighbor.HeatUp();
-                    }
+                      neighbor.HeatUp();
                 }
             }
         }
@@ -96,13 +99,23 @@ namespace FatesMotel
             vTemperature += 20;
 
         }
+
+        public void Cool(int coolant)
+        {
+            //cool by amount of coolant given
+            vTemperature -= coolant;
+        }
+
         public void OnTick()
         {
-            if (vHeatUp == true)
+            if (Extinguished()==false)
             {
-                GetNeighbors();
-                Burn();
-                SetState();
+                if (vHeatUp == true)
+                {
+                    GetNeighbors();
+                    Burn();
+                    SetState();
+                }
             }
         }
 
@@ -120,33 +133,33 @@ namespace FatesMotel
             {
                 if (vCurrentState != State.DANGER)
                 {
-                    Console.WriteLine(GetName() + " is DANGER");
-                }
-                vCurrentState = State.DANGER;
+                    Console.WriteLine(GetName() + " is in danger");
+                    vCurrentState = State.DANGER;
+                }   
             }
             else if (vTemperature >= 300 && vTemperature < 600)
             {
                 if (vCurrentState != State.SMOULDER)
                 {
-                    Console.WriteLine(GetName() + " is SMOULDER");
-                }
-                vCurrentState = State.SMOULDER;
+                    Console.WriteLine(GetName() + " is smouldering");
+                    vCurrentState = State.SMOULDER;
+                }    
             }
             else if (vTemperature >= 600 && vTemperature < 700)
             {
                 if (vCurrentState != State.FIRE)
                 {
-                    Console.WriteLine(GetName() + " is FIRE");
+                    Console.WriteLine(GetName() + " is on fire");
+                    vCurrentState = State.FIRE;
                 }
-                vCurrentState = State.FIRE;
             }
             else
             {
                 if (vCurrentState != State.BURNEDOUT)
                 {
                     Console.WriteLine(GetName() + " is BURNEDOUT");
+                    vCurrentState = State.BURNEDOUT;
                 }
-                vCurrentState = State.BURNEDOUT;
             }
         }
         public void InitialBurn()
