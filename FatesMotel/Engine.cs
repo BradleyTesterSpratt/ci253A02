@@ -48,33 +48,27 @@ namespace FatesMotel
 
         public void GetState()
         {
-
+            vCurrentState === Engine.State();
         }
 
         public void Move(Location vDestination)
         {
-            VCurrentLocation.GetType();
+            vCurrentLocation.GetType();
             SetState();
         }
 
         private void Extinguish()
         {
-
-            /*check coolant level
-            /if room can cool down 
-            /cool by (set) tick
-            /reduce extinguish level
-            /room temp down 1 state?
-            */
+                
             if (vCoolantLevel >= 40)
             {
                 vCoolantLevel -= 40;
 
 
-                 else if (vCoolantLevel <= 39)
-                 {
+              else if (vCoolantLevel <= 39)
+              {
                 Console.WriteLine("Engine empty");
-                 }
+              }
            
 
             }
@@ -84,18 +78,24 @@ namespace FatesMotel
 
         private void Refill()
         {
-            //if (vCurrentLocation == Station)
-
-            // if coolant less than full
-            // add x coolant
-
-            //if coolant greater than full
-            //set to full
-            Console.WriteLine("Engine refilled");
-
-
+            if (vCurrentLocation == Location.Station)
+            {
+                // if coolant less than full
+                // add x coolant
+                if (vCoolantLevel < 600)
+                {
+                    vCoolantLevel = 600;
+                    Console.WriteLine("Engine refilled");
+                }
+                //if coolant greater than full
+                //set to full
+                else if (vCoolantLevel > 600)
+                {
+                    vCoolantLevel = 600;
+                }
+            }
+           
             
-
             else
             {
                 Console.WriteLine("Engine not in station");
@@ -114,16 +114,23 @@ namespace FatesMotel
     public void OnTick()
     {
          SetState();
-
+        //if state is ONCALL
         if (vCurrentState == State.ONCALL)
 
         {
             Extinguish();
         }
-
-        //if state is ONCALL
         //if state is STATIONED refill
+        else if (vCurrentState == State.Stationed)
+        {
+            vCoolantLevel = Refill(max);
+        }
         //if STATE is FREE do nothing?
+        else if (vCurrenState == State.FREE)
+        {
+            Console.WriteLine("Engine is free to move")
+        }
+
     }
 }
 
