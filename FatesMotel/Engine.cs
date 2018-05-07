@@ -62,7 +62,7 @@ namespace FatesMotel
 
         public void Move(Location vDestination)
         {
-            vCurrentLocation.GetType();
+            vCurrentLocation = vDestination;
             SetState();
         }
 
