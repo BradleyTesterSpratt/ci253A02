@@ -55,7 +55,7 @@ namespace FatesMotel
             vMotel.MotelReport();
         }
 
-        public void MoveEngine(Room destination)
+        public void MoveEngine(Location destination)
         {
             vEngine.Move(destination);
         }
