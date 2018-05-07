@@ -27,11 +27,13 @@ namespace FatesMotel
             Console.WriteLine("  2        Normal  ");
             Console.WriteLine("  3         Hard   ");
             Console.WriteLine("  4        Custom  ");
+            Console.Write("Input : ");
             string vDifficulty = Console.ReadLine();
 
             while (!(int.Parse(vDifficulty)<5&& int.Parse(vDifficulty) > 0))
             {
                 Console.WriteLine(" Invalid Input, Choose Difficulty ");
+                Console.Write("Input : ");
                 vDifficulty = Console.ReadLine();
             }
             switch (int.Parse(vDifficulty))
@@ -66,18 +68,23 @@ namespace FatesMotel
                 case 4:
                     //input flors and check they are valid
                     Console.Write("Choose Number of Floors (up to 3): ");
+                    Console.Write("Input : ");
                     vFloorsInput = Console.ReadLine();
                     while (!(int.Parse(vFloorsInput) < 4 && int.Parse(vFloorsInput) > 0))
                     {
                         Console.WriteLine(" Invalid Input, Choose Number of Floors (up to 3):");
+                        Console.Write("Input : ");
                         vFloorsInput = Console.ReadLine();
                     }
                     //input rooms and check they are valid
+
                     Console.Write("Choose Number of Rooms per Floor (minimum of 5, maximum of 16): ");
+                    Console.Write("Input : ");
                     vRoomsInput = Console.ReadLine();
                     while (!(int.Parse(vRoomsInput) < 17 && int.Parse(vRoomsInput) > 4))
                     {
                         Console.WriteLine(" Invalid Input, Choose Number of Rooms per Floor(minimum of 5, maximum of 16):");
+                        Console.Write("Input : ");
                         vFloorsInput = Console.ReadLine();
                     }
                     int vRoomNo = (int.Parse(vRoomsInput) * int.Parse(vFloorsInput));
@@ -91,11 +98,13 @@ namespace FatesMotel
                     Console.WriteLine("  3        Fast   ");
                     Console.WriteLine("  4     Super Fast ");
                     Console.WriteLine("  5     Impossible ");
+                    Console.Write("Input : ");
                     string vSpeed = Console.ReadLine();
 
                     while (!(int.Parse(vSpeed)<6&& int.Parse(vSpeed) > 0))
                     {
                         Console.WriteLine(" Invalid Input, Choose Speed ");
+                        Console.Write("Input : ");
                         vSpeed = Console.ReadLine();
                     }
 
@@ -137,7 +146,7 @@ namespace FatesMotel
                 default:
                     break;
             }
-
+            Console.ReadKey();
         }
     }
 }

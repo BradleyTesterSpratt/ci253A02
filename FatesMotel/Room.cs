@@ -120,6 +120,7 @@ namespace FatesMotel
 
         public void Report()
         {
+            SetState();
             if (vCurrentState == State.SAFE)
             {
                 Console.WriteLine(GetName() + " is SAFE");
@@ -146,43 +147,23 @@ namespace FatesMotel
         {
             if (vTemperature >= 0 && vTemperature < 150)
             {
-                if  (vCurrentState != State.SAFE)
-                {
-                    Console.WriteLine(GetName() + " is SAFE");
-                } 
                 vCurrentState =State.SAFE;
             }
             else if (vTemperature >= 150 && vTemperature < 300)
             {
-                if (vCurrentState != State.DANGER)
-                {
-                    Console.WriteLine(GetName() + " is in danger");
                     vCurrentState = State.DANGER;
-                }   
             }
             else if (vTemperature >= 300 && vTemperature < 600)
             {
-                if (vCurrentState != State.SMOULDER)
-                {
-                    Console.WriteLine(GetName() + " is smouldering");
                     vCurrentState = State.SMOULDER;
-                }    
             }
             else if (vTemperature >= 600 && vTemperature < 700)
             {
-                if (vCurrentState != State.FIRE)
-                {
-                    Console.WriteLine(GetName() + " is on fire");
                     vCurrentState = State.FIRE;
-                }
             }
-            else
+            else if (vCurrentState != State.BURNEDOUT)
             {
-                if (vCurrentState != State.BURNEDOUT)
-                {
-                    Console.WriteLine(GetName() + " is BURNEDOUT");
                     vCurrentState = State.BURNEDOUT;
-                }
             }
         }
         public void InitialBurn()

@@ -44,6 +44,7 @@ namespace FatesMotel
             Room vBurningRoom = (Room)vRoomList.ElementAt(vRand.Next(1, (int)vRooms - 1));
             vBurningRoom.HeatUp();
             vBurningRoom.InitialBurn();
+            RoomReports();
         }
 
         private void AssignNeighbors()

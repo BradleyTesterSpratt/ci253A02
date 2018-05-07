@@ -11,16 +11,17 @@ namespace FatesMotel
         private int RefreshRate;
         private Motel vMotel;
         private Engine vEngine;
+        public bool vGameOver;
         public Game (Motel motel, GameSpeed speed)
         {
             vMotel = motel;
             RefreshRate = (int)speed;
             vEngine = new Engine(vMotel.GetRooms().ElementAt(0), 2318);
+            vGameOver = false;
         }
         public void TickTock(Object data)
         {
-            if (vMotel.GameOver() != false)
-            {
+
                 foreach (Location room in vMotel.GetRooms())
                 {
                     if (room.GetType() == typeof(Room))
@@ -33,7 +34,7 @@ namespace FatesMotel
                 {
                     Console.WriteLine("GAME OVER");
                 }
-            }
+            //}
         }
         public int GetRefreshRate()
         {
@@ -65,7 +66,8 @@ namespace FatesMotel
             vEngine.Refill();
         }
 
-        public Motel GetRooms()
-        { return vMotel; }
+        public HashSet<Location> GetRooms()
+            
+        { return vMotel.GetRooms(); }
     }
 }

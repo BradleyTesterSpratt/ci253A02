@@ -19,7 +19,7 @@ namespace FatesMotel
         public void Play()
         {
             Boolean finished = false;
-            while (!finished)
+            while (!vGame.vGameOver)
             {
                 Console.Write("Command: ");
                 Command command = parser.GetCommand();
@@ -31,22 +31,36 @@ namespace FatesMotel
         {
             if (c.IsUnknown)
             { return false; }
+
             if (c.CommandWord == "engine")
             {
-                if (c.SecondWord == "go")
+                if (c.SecondWord == "report")
                 {
-                    foreach (Location room in vGame.GetRooms().GetRooms())
+                    vGame.EngineReport();
+                    return true;
+                }
+                else if (c.SecondWord == "goto")
+                {
+                    foreach (Location room in vGame.GetRooms())
                     {
-                        if (c.ThirdWord == room.GetID().ToString())
+                        if (c.FourthWord == room.GetID().ToString())
                         {
                             vGame.MoveEngine(room);
                             return true;
                         }
-                        return false;
                     }
                 }
+                else if (c.SecondWord=="recall")
+                {
+                    vGame.MoveEngine(vGame.GetRooms().ElementAt(0));
+                }
+                else if (c.SecondWord=="refill")
+                {
+                    vGame.EngineRefill();
+                }
+                else { return false; }
             }
-            return false;
+            return false; 
         }
     }
 }
