@@ -32,9 +32,19 @@ namespace FatesMotel
                 vEngine.OnTick();
                 if (vMotel.GameOver() == true)
                 {
-                Console.WriteLine("GAME OVER"); //will signify the end of the game
-                }
-            //}
+                vGameOver = true;
+                //get final results
+                End(); 
+            }
+        }
+
+        public void End()
+        {
+            Console.WriteLine("    Game Over    ");
+            Console.WriteLine("    ---- ----    ");
+            Console.WriteLine("Your results are:");
+            GameReport();
+            Console.ReadLine();
         }
         public int GetRefreshRate()
         {
@@ -68,7 +78,7 @@ namespace FatesMotel
 
         public HashSet<Location> GetRooms()
             
-<<<<<<< Updated upstream
+
         { return vMotel.GetRooms(); }
 
         //method to give access to engine for testing
@@ -76,8 +86,5 @@ namespace FatesMotel
         {
             return vEngine;
         }
-=======
-        { return vMotel.GetRooms(); } //gets room
->>>>>>> Stashed changes
     }
 }
