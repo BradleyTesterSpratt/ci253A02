@@ -95,6 +95,7 @@ namespace FatesMotel
                 vCurrentRoom.Cool(vCoolantLevel);
                 vCoolantLevel = 0;
                 Console.WriteLine("Engine empty");
+                Console.Write("Command: ");
             }
 
         }
@@ -110,6 +111,8 @@ namespace FatesMotel
                 {
 
                     Console.WriteLine("Engine already full");
+                    Console.Write("Command: ");
+
                 }
                 //if coolant greater than full
                 //set to full
@@ -117,12 +120,14 @@ namespace FatesMotel
                 {
                     vCoolantLevel = 600;
                     Console.WriteLine("Engine refilled");
+                    Console.Write("Command: ");
                 }
 
             }
             else
             {
                 Console.WriteLine("Engine not at station");
+                Console.Write("Command: ");
             }
         }
 
@@ -151,6 +156,7 @@ namespace FatesMotel
                 if (vFreeToMove)
                 {
                     Console.WriteLine("Engine is free to move");
+                    Console.Write("Command: ");
                     vFreeToMove = false;
                 }
             }
