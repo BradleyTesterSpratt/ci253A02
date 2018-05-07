@@ -18,6 +18,7 @@ namespace FatesMotel
         };
         private State vCurrentState;
         private Location vCurrentLocation;
+        private bool vFreeToMove;
 
 
         public Engine(Location location, int engineID)
@@ -26,6 +27,7 @@ namespace FatesMotel
             vCoolantLevel = 600;
             vCurrentLocation = location;
             SetState();
+            vFreeToMove = false;
         }
 
         private void SetState()
@@ -63,6 +65,7 @@ namespace FatesMotel
         public void Move(Location vDestination)
         {
             vCurrentLocation = vDestination;
+            vFreeToMove = true;
             SetState();
             Console.WriteLine("Engine at " + vCurrentLocation.GetName());
         }
@@ -127,7 +130,7 @@ namespace FatesMotel
 
         public void Report()
         {
-            Console.WriteLine("Engine Report: /n");
+            Console.WriteLine("Engine Report: ");
             GetCoolant();
             GetState();
         }
@@ -141,11 +144,15 @@ namespace FatesMotel
             {
                 Extinguish();
             }
-         
+
             //if STATE is FREE do nothing?
             else if (vCurrentState == State.FREE)
             {
-                Console.WriteLine("Engine is free to move");
+                if (vFreeToMove)
+                {
+                    Console.WriteLine("Engine is free to move");
+                    vFreeToMove = false;
+                }
             }
 
         }
