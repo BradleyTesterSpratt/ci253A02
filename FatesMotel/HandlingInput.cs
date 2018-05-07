@@ -9,6 +9,12 @@ namespace FatesMotel
     class HandlingInput
     {
         private Parser parser = new Parser();
+        private Game vGame;
+
+        public HandlingInput(Game game)
+        {
+            vGame = game;
+        }
 
         public void Play()
         {
@@ -24,7 +30,22 @@ namespace FatesMotel
         private Boolean ProcessCommand(Command c)
         {
             if (c.IsUnknown)
-                return true;
+            { return false; }
+            if (c.CommandWord == "engine")
+            {
+                if (c.SecondWord == "go")
+                {
+                    foreach (Location room in vGame.GetRooms().GetRooms())
+                    {
+                        if (c.ThirdWord == room.GetID().ToString())
+                        {
+                            vGame.MoveEngine(room);
+                            return true;
+                        }
+                        return false;
+                    }
+                }
+            }
             return false;
         }
     }
