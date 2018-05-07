@@ -97,7 +97,6 @@ namespace FatesMotel
         {
             //increase temperature
             vTemperature += 20;
-
         }
 
         public void Cool(int coolant)
@@ -116,6 +115,30 @@ namespace FatesMotel
                     Burn();
                     SetState();
                 }
+            }
+        }
+
+        public void Report()
+        {
+            if (vCurrentState == State.SAFE)
+            {
+                Console.WriteLine(GetName() + " is SAFE");
+            }
+            else if (vCurrentState == State.DANGER)
+            {
+                Console.WriteLine(GetName() + " is in danger");
+            }
+            else if (vCurrentState == State.SMOULDER)
+            {
+                Console.WriteLine(GetName() + " is smouldering");
+            }
+            else if (vCurrentState == State.FIRE)
+            {
+                Console.WriteLine(GetName() + " is on fire");
+            }
+            else if (vCurrentState == State.BURNEDOUT)
+            {
+                Console.WriteLine(GetName() + " is BURNEDOUT");
             }
         }
 

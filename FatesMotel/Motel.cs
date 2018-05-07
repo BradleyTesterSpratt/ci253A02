@@ -71,6 +71,75 @@ namespace FatesMotel
             return vRoomList;
         }
 
+        public void RoomReports()
+        {
+            foreach(Location location in vRoomList)
+            {
+                if (location.GetType() == typeof(Room))
+                {
+                    Room vCurrentRoom = (Room)location;
+                    vCurrentRoom.Report();
+                }
+            }
+        }
+
+        public void MotelReport()
+        {
+            int vSafeCount=0;
+            int vBurnedOutCount = 0;
+            int vDangerCount=0;
+            int vSmoulderCount=0;
+            int vFireCount=0;
+            foreach (Location location in vRoomList)
+            {
+                if (location.GetType() == typeof(Room))
+                {
+                    Room vCurrentRoom = (Room)location;
+                    if (vCurrentRoom.GetState()==Room.State.SAFE)
+                    {
+                        vSafeCount++;
+                    }
+                    else if (vCurrentRoom.GetState() == Room.State.DANGER)
+                    {
+                        vDangerCount++;
+                    }
+                    else if (vCurrentRoom.GetState() == Room.State.SMOULDER)
+                    {
+                        vSmoulderCount++;
+                    }
+                    else if (vCurrentRoom.GetState() == Room.State.FIRE)
+                    {
+                        vFireCount++;
+                    }
+                    else if (vCurrentRoom.GetState() == Room.State.BURNEDOUT)
+                    {
+                        vBurnedOutCount++;
+                    }
+                }
+            }
+            Console.WriteLine("  ROOM   COUNT");
+            Console.WriteLine("-------- -----");
+            if (vSafeCount!=0)
+            {
+                Console.WriteLine("   SAFE    "+vSafeCount);
+            }
+            if (vDangerCount != 0)
+            {
+                Console.WriteLine("  DANGER   " + vDangerCount);
+            }
+            if (vSmoulderCount != 0)
+            {
+                Console.WriteLine(" SMOULDER  " + vSmoulderCount);
+            }
+            if (vFireCount != 0)
+            {
+                Console.WriteLine("   FIRE    " + vFireCount);
+            }
+            if (vBurnedOutCount != 0)
+            {
+                Console.WriteLine("BURNED OUT " + vBurnedOutCount);
+            }
+        }
         public bool GameOver()
         {
             bool vGameOver=false;

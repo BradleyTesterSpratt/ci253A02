@@ -11,8 +11,8 @@ namespace FatesMotel
         static void Main(string[] args)
         {
             //for use with custom
-            //string vRoomsInput;
-            //string vFloorsInput;
+            string vRoomsInput;
+            string vFloorsInput;
             Motel vMotel;
             Game vGame;
             TimerCallback timerCallBack;
@@ -25,11 +25,10 @@ namespace FatesMotel
             Console.WriteLine("  1         Easy   ");
             Console.WriteLine("  2        Normal  ");
             Console.WriteLine("  3         Hard   ");
-            //do not use custom, no input checking yet
-            //Console.WriteLine("  4        Custom  ");
+            Console.WriteLine("  4        Custom  ");
             string vDifficulty = Console.ReadLine();
 
-            while (!(int.Parse(vDifficulty)<4&& int.Parse(vDifficulty) > 0))
+            while (!(int.Parse(vDifficulty)<5&& int.Parse(vDifficulty) > 0))
             {
                 Console.WriteLine(" Invalid Input, Choose Difficulty ");
                 vDifficulty = Console.ReadLine();
@@ -55,40 +54,83 @@ namespace FatesMotel
                     vGame = new Game(vMotel, GameSpeed.FAST);
                     timerCallBack = vGame.TickTock;
                     vTimer = new Timer(timerCallBack, null, 1000, vGame.GetRefreshRate());
+                    break;
+
+                case 4:
+                    //input flors and check they are valid
+                    Console.Write("Choose Number of Floors (up to 3): ");
+                    vFloorsInput = Console.ReadLine();
+                    while (!(int.Parse(vFloorsInput) < 4 && int.Parse(vFloorsInput) > 0))
+                    {
+                        Console.WriteLine(" Invalid Input, Choose Number of Floors (up to 3):");
+                        vFloorsInput = Console.ReadLine();
+                    }
+                    //input rooms and check they are valid
+                    Console.Write("Choose Number of Rooms per Floor (minimum of 5, maximum of 16): ");
+                    vRoomsInput = Console.ReadLine();
+                    while (!(int.Parse(vRoomsInput) < 17 && int.Parse(vRoomsInput) > 4))
+                    {
+                        Console.WriteLine(" Invalid Input, Choose Number of Rooms per Floor(minimum of 5, maximum of 16):");
+                        vFloorsInput = Console.ReadLine();
+                    }
+                    int vRoomNo = (int.Parse(vRoomsInput) * int.Parse(vFloorsInput));
+
+                    Console.WriteLine("   Choose Speed   ");
+                    Console.WriteLine("   ------------   ");
+                    Console.WriteLine("INPUT      SPEED  ");
+                    Console.WriteLine("-----    ---------");
+                    Console.WriteLine("  1        Slow   ");
+                    Console.WriteLine("  2       Average ");
+                    Console.WriteLine("  3        Fast   ");
+                    Console.WriteLine("  4     Super Fast ");
+                    Console.WriteLine("  5     Impossible ");
+                    string vSpeed = Console.ReadLine();
+
+                    while (!(int.Parse(vSpeed)<6&& int.Parse(vSpeed) > 0))
+                    {
+                        Console.WriteLine(" Invalid Input, Choose Speed ");
+                        vSpeed = Console.ReadLine();
+                    }
+
+                    vMotel = new Motel(vRoomNo, int.Parse(vFloorsInput));
+                    switch (int.Parse(vSpeed))
+                    {
+                        case 1 : 
+                            vGame = new Game(vMotel, GameSpeed.SLOW);
+                            timerCallBack = vGame.TickTock;
+                            vTimer = new Timer(timerCallBack, null, 1000, vGame.GetRefreshRate());
+                            break;
+                        case 2 :
+                            vGame = new Game(vMotel, GameSpeed.AVERAGE);
+                            timerCallBack = vGame.TickTock;
+                            vTimer = new Timer(timerCallBack, null, 1000, vGame.GetRefreshRate());
+                            break;
+                        case 3 :
+                            vGame = new Game(vMotel, GameSpeed.FAST);
+                            timerCallBack = vGame.TickTock;
+                            vTimer = new Timer(timerCallBack, null, 1000, vGame.GetRefreshRate());
+                            break;
+                        case 4 :
+                            vGame = new Game(vMotel, GameSpeed.SUPERFAST);
+                            timerCallBack = vGame.TickTock;
+                            vTimer = new Timer(timerCallBack, null, 1000, vGame.GetRefreshRate());
+                            break;
+                        case 5 :
+                            vGame = new Game(vMotel, GameSpeed.IMPOSSIBLE);
+                            timerCallBack = vGame.TickTock;
+                            vTimer = new Timer(timerCallBack, null, 1000, vGame.GetRefreshRate());
+                            break;
+                        default:
+                            break;
+                    }
 
                     break;
-                /*
-                case 4:
-                    //add checks to make sure acceptable numbers
-                        Console.Write("Choose Number of Floors: ");
-                        vFloorsInput = Console.ReadLine();
-                        Console.Write("Choose Number of Rooms: ");
-                        vRoomsInput = Console.ReadLine();
-                        Console.WriteLine("   Choose Speed   ");
-                        Console.WriteLine("   ------------   ");
-                        Console.WriteLine("INPUT      SPEED  ");
-                        Console.WriteLine("-----    ---------");
-                        Console.WriteLine("  1        Slow   ");
-                        Console.WriteLine("  2       Average ");
-                        Console.WriteLine("  3        Fast   ");
-                        Console.WriteLine("  4     Super Fast ");
-                        Console.WriteLine("  5     Impossible ");
-                    //add checks to make sure acceptable number
-                        string vSpeed = Console.ReadLine();
-                        vMotel = new Motel(int.Parse(vRoomsInput), int.Parse(vFloorsInput));
-                        switch (int.Parse(vSpeed))
-                        {
-                            case 1 : 
-                                vGame = new Game(vMotel, GameSpeed.SLOW;
-                                break;
-                        }
-                        break;
-                    */
+                       
                 default:
                     break;
             }
-            Console.Clear();
-            Console.ReadKey();
+            HandlingInput input = new HandlingInput();
+            input.Play();
         }
     }
 }
