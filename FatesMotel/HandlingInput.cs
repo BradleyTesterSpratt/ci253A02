@@ -76,9 +76,13 @@ namespace FatesMotel
             }
             else if (c.CommandWord == "clear"){
                 Console.Clear();
+                return true;
             }
             else if (c.CommandWord == "quit"){
-                Environment.Exit(0);
+                vGame.vGameOver = true;
+                Console.Clear();
+                vGame.End();
+                return true;
             }
             return false; 
         }
