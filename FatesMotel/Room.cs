@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,10 +6,17 @@ using System.Threading.Tasks;
 
 namespace FatesMotel
 {
+<<<<<<< Updated upstream
     internal class Room : Location
+=======
+    //room inherits from locaiton
+    class Room : Location
+>>>>>>> Stashed changes
 
     {
-
+        //temp variable set
+        //variable of neighbors for rooms
+        //roomm states declared
         private int vTemperature;
         private HashSet<Room> vNeighbors;
         public enum State
@@ -20,12 +27,15 @@ namespace FatesMotel
             FIRE,
             BURNEDOUT
         };
+        //room bool heat up
         private Boolean vHeatUp;
         private State vCurrentState;
 
     
         public Room(int RoomID)
         {
+            //room has ID and temp set
+            //
             vLocationID = RoomID;
             vTemperature = 1;
             vNeighbors = new HashSet<Room>();

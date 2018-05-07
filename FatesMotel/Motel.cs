@@ -8,6 +8,7 @@ namespace FatesMotel
 {
     internal class Motel
     {
+        //argumenst for room and floors
         private double vRooms;
         private int vFloors;
         private HashSet<Location> vRoomList = new HashSet<Location>();
@@ -20,7 +21,12 @@ namespace FatesMotel
             PopulateMotel();
             AssignNeighbors();
         }
-
+        /*
+         * add locations to motel
+         * assign rooms to floors
+         * rooms / floor
+         * if odd number of rooms, ground floor has the extra
+         */
         private void PopulateMotel()
         {
             vRoomList.Add(new Station(000, "Station"));
@@ -46,7 +52,7 @@ namespace FatesMotel
             vBurningRoom.InitialBurn();
             RoomReports();
         }
-
+        //
         private void AssignNeighbors()
         {
             for (int n = 0; n < vRoomList.Count; n++)
@@ -66,12 +72,12 @@ namespace FatesMotel
                 }
             }
          }
-
+        //return list of rooms in hashset
         public HashSet<Location> GetRooms()
         {
             return vRoomList;
         }
-
+        //gets currentRoom report
         public void RoomReports()
         {
             foreach(Location location in vRoomList)
@@ -83,7 +89,7 @@ namespace FatesMotel
                 }
             }
         }
-
+        //displays how many rooms are in set STATE
         public void MotelReport()
         {
             int vSafeCount=0;
