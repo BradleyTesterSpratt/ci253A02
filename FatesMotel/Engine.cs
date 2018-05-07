@@ -95,25 +95,31 @@ namespace FatesMotel
 
         }
 
-        private void Refill()
+        public void Refill()
         {
 
-
-            // if coolant less than full
-            // add x coolant
-            if (vCoolantLevel >= 600)
+            if (vCurrentState == State.STATIONED)
             {
+                // if coolant less than full
+                // add x coolant
+                if (vCoolantLevel >= 600)
+                {
 
-                Console.WriteLine("Engine already full");
+                    Console.WriteLine("Engine already full");
+                }
+                //if coolant greater than full
+                //set to full
+                else if (vCoolantLevel < 600)
+                {
+                    vCoolantLevel = 600;
+                    Console.WriteLine("Engine refilled");
+                }
+
             }
-            //if coolant greater than full
-            //set to full
-            else if (vCoolantLevel < 600)
+            else
             {
-                vCoolantLevel = 600;
-                Console.WriteLine("Engine refilled");
+                Console.WriteLine("Engine not at station");
             }
-
         }
 
 
@@ -133,11 +139,7 @@ namespace FatesMotel
             {
                 Extinguish();
             }
-            //if state is STATIONED refill
-            else if (vCurrentState == State.STATIONED)
-            {
-                Refill();
-            }
+         
             //if STATE is FREE do nothing?
             else if (vCurrentState == State.FREE)
             {
