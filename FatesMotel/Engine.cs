@@ -132,14 +132,8 @@ namespace FatesMotel
             //Engine STATE checked to allow refill
             if (vCurrentState == State.STATIONED)
             {
-<<<<<<< Updated upstream
- 
                 // if coolant less than full
                 // add x coolant
-=======
-                // if coolant greater or equal 
-                // engine is full
->>>>>>> Stashed changes
                 if (vCoolantLevel >= 600)
                 {
 

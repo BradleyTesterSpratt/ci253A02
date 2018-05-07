@@ -6,19 +6,14 @@ using System.Threading.Tasks;
 
 namespace FatesMotel
 {
-<<<<<<< Updated upstream
+    //room inherits from location
     internal class Room : Location
-=======
-    //room inherits from locaiton
-    class Room : Location
->>>>>>> Stashed changes
-
     {
         //temp variable set
-        //variable of neighbors for rooms
-        //roomm states declared
         private int vTemperature;
+        //variable of neighbors for rooms
         private HashSet<Room> vNeighbors;
+        //room states declared
         public enum State
         {
             SAFE,
@@ -37,6 +32,7 @@ namespace FatesMotel
             //room has ID and temp set
             //
             vLocationID = RoomID;
+            //temp is set as 1, as at 0 it can not ever start burning
             vTemperature = 1;
             vNeighbors = new HashSet<Room>();
             vLocationName = "Room " + vLocationID.ToString();
@@ -179,6 +175,7 @@ namespace FatesMotel
                     vCurrentState = State.BURNEDOUT;
             }
         }
+        //method use to start game
         public void InitialBurn()
         {
             vTemperature=150;
