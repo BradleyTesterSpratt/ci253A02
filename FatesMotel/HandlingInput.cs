@@ -74,10 +74,10 @@ namespace FatesMotel
                 }
                 else { return false; }
             }
-            else if (c.CommandWord == "Clear"){
+            else if (c.CommandWord == "clear"){
                 Console.Clear();
             }
-            else if (c.CommandWord == "Quit"){
+            else if (c.CommandWord == "quit"){
                 Environment.Exit(0);
             }
             return false; 

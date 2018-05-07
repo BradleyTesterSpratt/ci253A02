@@ -12,6 +12,7 @@ namespace FatesMotel
         {
             string inputLine = "> ";
             inputLine = Console.ReadLine();
+            inputLine.ToLower();
             String[] values = inputLine.Split(' ', '\n');
             if (CommandWords.IsCommand(values[0]))
                 if (values.Count() == 1)
