@@ -8,12 +8,12 @@ namespace FatesMotel
 {
     class Parser
     {
-        public Command getCommand()
+        public Command GetCommand()
         {
             string inputLine = "> ";
             inputLine = Console.ReadLine();
             String[] values = inputLine.Split(' ', '\n');
-            if (CommandWords.isCommand(values[0]))
+            if (CommandWords.IsCommand(values[0]))
                 if (values.Count() == 1)
                     return new Command { CommandWord = values[0], SecondWord = null };
                 else if (values.Count() == 2)

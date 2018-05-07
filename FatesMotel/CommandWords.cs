@@ -12,7 +12,7 @@ namespace FatesMotel
         private static String[] validCommands = { "quit", "help", "room", "list", "report", "clear", "engine", "recall", "refill", "go"};
         public String[] ValidCommands { get { return validCommands; } }
 
-        public static Boolean isCommand(String command)
+        public static Boolean IsCommand(String command)
         {
             if (validCommands.Contains(command))
                 return true;

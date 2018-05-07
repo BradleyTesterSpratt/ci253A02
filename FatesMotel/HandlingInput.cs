@@ -10,18 +10,18 @@ namespace FatesMotel
     {
         private Parser parser = new Parser();
 
-        public void play()
+        public void Play()
         {
             Boolean finished = false;
             while (!finished)
             {
                 Console.Write("Command: ");
-                Command command = parser.getCommand();
-                finished = processCommand(command);
+                Command command = parser.GetCommand();
+                finished = ProcessCommand(command);
             }
         }
 
-        private Boolean processCommand(Command c)
+        private Boolean ProcessCommand(Command c)
         {
             if (c.IsUnknown)
                 return true;
