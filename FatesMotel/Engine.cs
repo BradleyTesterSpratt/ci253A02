@@ -126,6 +126,7 @@ namespace FatesMotel
 
         public void Report()
         {
+            Console.WriteLine("Engine Report: /n");
             GetCoolant();
             GetState();
         }
