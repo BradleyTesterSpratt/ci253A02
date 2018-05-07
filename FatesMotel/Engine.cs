@@ -35,7 +35,7 @@ namespace FatesMotel
             if (vCurrentLocation.GetType() == typeof(Room))
             {
                 Room vCurrentRoom = (Room)vCurrentLocation;
-                if (vCurrentRoom.GetState() == Room.State.BURNEDOUT || vCurrentRoom.GetState() == Room.State.SAFE)
+                if (vCurrentRoom.GetState() == Room.State.BURNEDOUT || (vCurrentRoom.GetState() == Room.State.SAFE && vCurrentRoom.Extinguished()))
                 {
                     vCurrentState = State.FREE;
                 }
