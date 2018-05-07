@@ -30,7 +30,10 @@ namespace FatesMotel
         private Boolean ProcessCommand(Command c)
         {
             if (c.IsUnknown)
-            { return false; }
+            {
+                Console.Write("Input Valid ");
+                return false;
+            }
 
             if (c.CommandWord == "engine")
             {
@@ -41,13 +44,23 @@ namespace FatesMotel
                 }
                 else if (c.SecondWord == "goto")
                 {
+                    bool vValidRoom = false;
                     foreach (Location room in vGame.GetRooms())
                     {
                         if (c.FourthWord == room.GetID().ToString())
                         {
                             vGame.MoveEngine(room);
-                            return true;
+                            vValidRoom = true;
                         }
+                    }
+                    if (vValidRoom==true)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        Console.Write("Invalid Room, Input Valid ");
+                        return false;
                     }
                 }
                 else if (c.SecondWord=="recall")
@@ -58,7 +71,11 @@ namespace FatesMotel
                 {
                     vGame.EngineRefill();
                 }
-                else { return false; }
+                else
+                {
+                    Console.Write("Input Valid ");
+                    return false;
+                }
             }
             else if(c.CommandWord == "room")
             {
@@ -72,7 +89,11 @@ namespace FatesMotel
                     vGame.GameReport();
                     return true;
                 }
-                else { return false; }
+                else
+                {
+                    Console.Write("Input Valid ");
+                    return false;
+                }
             }
             else if (c.CommandWord == "clear"){
                 Console.Clear();
@@ -84,6 +105,7 @@ namespace FatesMotel
                 vGame.End();
                 return true;
             }
+            Console.Write("Input Valid ");
             return false; 
         }
     }

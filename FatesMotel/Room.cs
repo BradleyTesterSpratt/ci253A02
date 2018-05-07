@@ -76,7 +76,10 @@ namespace FatesMotel
         public bool Extinguished()
         {
             if (vTemperature<=0)
-            { return true; }
+            {
+                vTemperature = 0;
+                return true;
+            }
             else
             { return false; }
         }

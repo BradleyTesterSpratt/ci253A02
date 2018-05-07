@@ -118,27 +118,27 @@ namespace FatesMotel
                     }
                 }
             }
-            Console.WriteLine("  ROOM   COUNT");
-            Console.WriteLine("-------- -----");
+            Console.WriteLine("   ROOM    COUNT");
+            Console.WriteLine("---------- -----");
             if (vSafeCount!=0)
             {
-                Console.WriteLine("   SAFE    "+vSafeCount);
+                Console.WriteLine("   SAFE      "+vSafeCount);
             }
             if (vDangerCount != 0)
             {
-                Console.WriteLine("  DANGER   " + vDangerCount);
+                Console.WriteLine("  DANGER     " + vDangerCount);
             }
             if (vSmoulderCount != 0)
             {
-                Console.WriteLine(" SMOULDER  " + vSmoulderCount);
+                Console.WriteLine(" SMOULDER    " + vSmoulderCount);
             }
             if (vFireCount != 0)
             {
-                Console.WriteLine("   FIRE    " + vFireCount);
+                Console.WriteLine("   FIRE      " + vFireCount);
             }
             if (vBurnedOutCount != 0)
             {
-                Console.WriteLine("BURNED OUT " + vBurnedOutCount);
+                Console.WriteLine("BURNED OUT   " + vBurnedOutCount);
             }
         }
         public bool GameOver()

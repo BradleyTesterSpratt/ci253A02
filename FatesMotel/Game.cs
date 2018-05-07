@@ -21,7 +21,8 @@ namespace FatesMotel
         }
         public void TickTock(Object data)
         {
-
+            if(vGameOver==false)
+            { 
                 foreach (Location room in vMotel.GetRooms())
                 {
                     if (room.GetType() == typeof(Room))
@@ -32,9 +33,20 @@ namespace FatesMotel
                 vEngine.OnTick();
                 if (vMotel.GameOver() == true)
                 {
-                    Console.WriteLine("GAME OVER");
+                    vGameOver = true;
+                    End();
                 }
-            //}
+            }
+        }
+
+        public void End()
+        {
+            Console.WriteLine("    Game Over    ");
+            Console.WriteLine("    ---- ----    ");
+            Console.WriteLine("Your results are:");
+            GameReport();
+            Console.ReadLine();
+
         }
         public int GetRefreshRate()
         {

@@ -7,17 +7,29 @@ using System.Threading;
 namespace FatesMotel
 {
     class Program
-    {     
+    {
+
+        static void StartGame(double rooms, int floors, GameSpeed speed)
+        {
+            Motel vMotel = new Motel(rooms, floors);
+            Game vGame = new Game(vMotel, speed);
+            TimerCallback timerCallBack = vGame.TickTock;
+            Timer vTimer = new Timer(timerCallBack, null, 1000, vGame.GetRefreshRate());
+            HandlingInput vInput = new HandlingInput(vGame);
+            vInput.Play();
+        }
+
+        static void PrintHelp()
+        {
+            Console.Clear();
+
+        }
+        
         static void Main(string[] args)
         {
             //for use with custom
             string vRoomsInput;
             string vFloorsInput;
-            Motel vMotel;
-            Game vGame;
-            TimerCallback timerCallBack;
-            Timer vTimer;
-            HandlingInput vInput;
 
             Console.WriteLine(" Choose Difficulty ");
             Console.WriteLine(" ----------------- ");
@@ -39,52 +51,33 @@ namespace FatesMotel
             switch (int.Parse(vDifficulty))
             {
                 case 1:
-                    vMotel = new Motel(16, 1);
-                    vGame = new Game(vMotel, GameSpeed.FAST);
-                    timerCallBack = vGame.TickTock;
-                    vTimer = new Timer(timerCallBack, null, 1000, vGame.GetRefreshRate());
-                    vInput = new HandlingInput(vGame);
-                    vInput.Play();
+                    StartGame(16, 1,GameSpeed.FAST);
                     break;
 
                 case 2:
-                    vMotel = new Motel(16, 1);
-                    vGame = new Game(vMotel, GameSpeed.SUPERFAST);
-                    timerCallBack = vGame.TickTock;
-                    vTimer = new Timer(timerCallBack, null, 1000, vGame.GetRefreshRate());
-                    vInput = new HandlingInput(vGame);
-                    vInput.Play();
+                    StartGame(16, 1, GameSpeed.SUPERFAST);
                     break;
 
                 case 3:
-                    vMotel = new Motel(32, 2);
-                    vGame = new Game(vMotel, GameSpeed.FAST);
-                    timerCallBack = vGame.TickTock;
-                    vTimer = new Timer(timerCallBack, null, 1000, vGame.GetRefreshRate());
-                    vInput = new HandlingInput(vGame);
-                    vInput.Play();
+                    StartGame(32, 2, GameSpeed.FAST);
                     break;
 
                 case 4:
                     //input flors and check they are valid
                     Console.Write("Choose Number of Floors (up to 3): ");
-                    Console.Write("Input : ");
                     vFloorsInput = Console.ReadLine();
                     while (!(int.Parse(vFloorsInput) < 4 && int.Parse(vFloorsInput) > 0))
                     {
-                        Console.WriteLine(" Invalid Input, Choose Number of Floors (up to 3):");
-                        Console.Write("Input : ");
+                        Console.Write(" Invalid Input, Choose Number of Floors (up to 3):");
                         vFloorsInput = Console.ReadLine();
                     }
                     //input rooms and check they are valid
 
                     Console.Write("Choose Number of Rooms per Floor (minimum of 5, maximum of 16): ");
-                    Console.Write("Input : ");
                     vRoomsInput = Console.ReadLine();
                     while (!(int.Parse(vRoomsInput) < 17 && int.Parse(vRoomsInput) > 4))
                     {
-                        Console.WriteLine(" Invalid Input, Choose Number of Rooms per Floor(minimum of 5, maximum of 16):");
-                        Console.Write("Input : ");
+                        Console.Write(" Invalid Input, Choose Number of Rooms per Floor(minimum of 5, maximum of 16):");
                         vFloorsInput = Console.ReadLine();
                     }
                     int vRoomNo = (int.Parse(vRoomsInput) * int.Parse(vFloorsInput));
@@ -108,45 +101,31 @@ namespace FatesMotel
                         vSpeed = Console.ReadLine();
                     }
 
-                    vMotel = new Motel(vRoomNo, int.Parse(vFloorsInput));
                     switch (int.Parse(vSpeed))
                     {
                         case 1 : 
-                            vGame = new Game(vMotel, GameSpeed.SLOW);
-                            timerCallBack = vGame.TickTock;
-                            vTimer = new Timer(timerCallBack, null, 1000, vGame.GetRefreshRate());
+                            StartGame(vRoomNo, int.Parse(vFloorsInput), GameSpeed.SLOW);
                             break;
                         case 2 :
-                            vGame = new Game(vMotel, GameSpeed.AVERAGE);
-                            timerCallBack = vGame.TickTock;
-                            vTimer = new Timer(timerCallBack, null, 1000, vGame.GetRefreshRate());
+                            StartGame(vRoomNo, int.Parse(vFloorsInput), GameSpeed.AVERAGE);
                             break;
                         case 3 :
-                            vGame = new Game(vMotel, GameSpeed.FAST);
-                            timerCallBack = vGame.TickTock;
-                            vTimer = new Timer(timerCallBack, null, 1000, vGame.GetRefreshRate());
+                            StartGame(vRoomNo, int.Parse(vFloorsInput), GameSpeed.FAST);
                             break;
                         case 4 :
-                            vGame = new Game(vMotel, GameSpeed.SUPERFAST);
-                            timerCallBack = vGame.TickTock;
-                            vTimer = new Timer(timerCallBack, null, 1000, vGame.GetRefreshRate());
+                            StartGame(vRoomNo, int.Parse(vFloorsInput), GameSpeed.SUPERFAST);
                             break;
                         case 5 :
-                            vGame = new Game(vMotel, GameSpeed.IMPOSSIBLE);
-                            timerCallBack = vGame.TickTock;
-                            vTimer = new Timer(timerCallBack, null, 1000, vGame.GetRefreshRate());
+                            StartGame(vRoomNo, int.Parse(vFloorsInput), GameSpeed.IMPOSSIBLE);
                             break;
                         default:
                             break;
                     }
-                    //vInput = new HandlingInput(vGame);
-                    //vInput.Play();
                     break;
                        
                 default:
-                    break;
+                break;
             }
-            Console.ReadKey();
         }
     }
 }
