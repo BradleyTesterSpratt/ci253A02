@@ -17,6 +17,7 @@ namespace FatesMotel
             Game vGame;
             TimerCallback timerCallBack;
             Timer vTimer;
+            HandlingInput vInput;
 
             Console.WriteLine(" Choose Difficulty ");
             Console.WriteLine(" ----------------- ");
@@ -40,7 +41,7 @@ namespace FatesMotel
                     vGame = new Game(vMotel, GameSpeed.FAST);
                     timerCallBack = vGame.TickTock;
                     vTimer = new Timer(timerCallBack, null, 1000, vGame.GetRefreshRate());
-                    HandlingInput vInput = new HandlingInput(vGame);
+                    vInput = new HandlingInput(vGame);
                     vInput.Play();
                     break;
 
@@ -49,7 +50,7 @@ namespace FatesMotel
                     vGame = new Game(vMotel, GameSpeed.SUPERFAST);
                     timerCallBack = vGame.TickTock;
                     vTimer = new Timer(timerCallBack, null, 1000, vGame.GetRefreshRate());
-                    HandlingInput vInput = new HandlingInput(vGame);
+                    vInput = new HandlingInput(vGame);
                     vInput.Play();
                     break;
 
@@ -58,7 +59,7 @@ namespace FatesMotel
                     vGame = new Game(vMotel, GameSpeed.FAST);
                     timerCallBack = vGame.TickTock;
                     vTimer = new Timer(timerCallBack, null, 1000, vGame.GetRefreshRate());
-                    HandlingInput vInput = new HandlingInput(vGame);
+                    vInput = new HandlingInput(vGame);
                     vInput.Play();
                     break;
 
@@ -129,8 +130,8 @@ namespace FatesMotel
                         default:
                             break;
                     }
-                    HandlingInput vInput = new HandlingInput(vGame);
-                    vInput.Play();
+                    //vInput = new HandlingInput(vGame);
+                    //vInput.Play();
                     break;
                        
                 default:
