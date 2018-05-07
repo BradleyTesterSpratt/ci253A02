@@ -64,6 +64,7 @@ namespace FatesMotel
         {
             vCurrentLocation = vDestination;
             SetState();
+            Console.WriteLine("Engine at " + vCurrentLocation.GetName());
         }
 
         private void GetCoolant()
