@@ -10,6 +10,8 @@ namespace FatesMotel
     {
         public String CommandWord { get; set; }
         public String SecondWord { get; set; }
+        public String ThirdWord { get; set; }
         public Boolean IsUnknown { get { return (CommandWord == null); } }
+
     }
 }

@@ -17,7 +17,9 @@ namespace FatesMotel
                 if (values.Count() == 1)
                     return new Command { CommandWord = values[0], SecondWord = null };
                 else if (values.Count() == 2)
-                    return new Command { CommandWord = values[0], SecondWord = values[1] };
+                    return new Command { CommandWord = values[0], SecondWord = values[1], ThirdWord = null };
+            else if (values.Count() == 3)
+                return new Command { CommandWord = values[0], SecondWord = values[1], ThirdWord = values[2] };
             return new Command(); ;
 
         }
