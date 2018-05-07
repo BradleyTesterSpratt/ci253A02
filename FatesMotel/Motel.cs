@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FatesMotel
 {
-    class Motel
+    internal class Motel
     {
         private double vRooms;
         private int vFloors;

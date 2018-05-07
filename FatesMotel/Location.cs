@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FatesMotel
 {
-    abstract class Location
+    internal abstract class Location
     {
 
         protected int vLocationID;

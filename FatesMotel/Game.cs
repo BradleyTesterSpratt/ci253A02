@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FatesMotel
 {
-    class Game
+    internal class Game
     {
         private int RefreshRate;
         private Motel vMotel;
@@ -81,5 +81,11 @@ namespace FatesMotel
         public HashSet<Location> GetRooms()
             
         { return vMotel.GetRooms(); }
+
+        //method to give access to engine for testing
+        internal Engine TestEngine()
+        {
+            return vEngine;
+        }
     }
 }

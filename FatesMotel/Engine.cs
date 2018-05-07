@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FatesMotel
 {
-    class Engine
+    internal class Engine
     {
         private int vEngineID;
         private int vCoolantLevel;
@@ -19,6 +19,8 @@ namespace FatesMotel
         private State vCurrentState;
         private Location vCurrentLocation;
         private bool vFreeToMove;
+        //for unit testing
+        internal bool vCoolantTest;
 
 
         public Engine(Location location, int engineID)
@@ -105,6 +107,7 @@ namespace FatesMotel
 
             if (vCurrentState == State.STATIONED)
             {
+ 
                 // if coolant less than full
                 // add x coolant
                 if (vCoolantLevel >= 600)
@@ -112,6 +115,7 @@ namespace FatesMotel
 
                     Console.WriteLine("Engine already full");
                     Console.Write("Command: ");
+                    vCoolantTest = true;
 
                 }
                 //if coolant greater than full
@@ -121,6 +125,7 @@ namespace FatesMotel
                     vCoolantLevel = 600;
                     Console.WriteLine("Engine refilled");
                     Console.Write("Command: ");
+                    vCoolantTest = true;
                 }
 
             }
@@ -128,6 +133,7 @@ namespace FatesMotel
             {
                 Console.WriteLine("Engine not at station");
                 Console.Write("Command: ");
+                vCoolantTest = false;
             }
         }
 
@@ -161,6 +167,11 @@ namespace FatesMotel
                 }
             }
 
+        }
+        //method accessable for unit testing
+        internal bool CoolantTest()
+        {
+            return vCoolantTest;
         }
     }
 }

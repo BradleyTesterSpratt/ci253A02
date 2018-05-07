@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FatesMotel
 {
-    class Room : Location
+    internal class Room : Location
 
     {
 
