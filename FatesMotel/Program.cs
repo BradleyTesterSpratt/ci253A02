@@ -129,8 +129,8 @@ namespace FatesMotel
                 default:
                     break;
             }
-            HandlingInput input = new HandlingInput();
-            input.Play();
+            HandlingInput vInput = new HandlingInput(vGame);
+            vInput.Play();
         }
     }
 }

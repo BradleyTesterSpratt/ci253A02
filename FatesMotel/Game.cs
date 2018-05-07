@@ -64,5 +64,8 @@ namespace FatesMotel
         {
             vEngine.Refill();
         }
+
+        public Motel GetRooms()
+        { return vMotel; }
     }
 }
