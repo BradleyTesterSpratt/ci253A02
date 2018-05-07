@@ -62,12 +62,12 @@ namespace FatesMotel
             }
             else if(c.CommandWord == "room")
             {
-                if (c.SecondWord == "roomlist")
+                if (c.SecondWord == "list")
                 {
                     vGame.RoomReport();
                     return true;
                 }
-                else if (c.SecondWord == "roomreport")
+                else if (c.SecondWord == "report")
                 {
                     vGame.GameReport();
                     return true;
