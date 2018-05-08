@@ -46,6 +46,39 @@ namespace FatesMotel
             GameReport();
             Console.ReadLine();
         }
+
+        public void RoomHelp()
+        {
+            Console.WriteLine("Valid Room Commands are:");
+            Console.WriteLine("room list - list all rooms in the hotel and their current state");
+            Console.WriteLine("room report - list how many rooms are in each state");
+            Console.WriteLine("room help - shows room commands");
+        }
+
+        public void EngineHelp()
+        {
+            Console.WriteLine("Valid Engine commands are:");
+            Console.WriteLine("engine report - get the engines current status");
+            Console.WriteLine("engine goto room xxx - go to xxx room");
+            Console.WriteLine("engine recall - return to the station");
+            Console.WriteLine("engine refill - refill the engines coolant at station");
+            Console.WriteLine("engine help - shows engine commands");
+        }
+
+        public void MiscHelp()
+        {
+            Console.WriteLine("Other valid commands are :");
+            Console.WriteLine("clear - clears the screen");
+            Console.WriteLine("quit - ends the current game");
+            Console.WriteLine("help - shows all commands");
+        }
+
+        public void Help()
+        {
+            EngineHelp();
+            RoomHelp();
+            MiscHelp();
+        }
         public int GetRefreshRate()
         {
             return RefreshRate; //gets refreshrate

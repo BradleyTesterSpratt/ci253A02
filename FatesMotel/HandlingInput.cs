@@ -30,7 +30,10 @@ namespace FatesMotel
         private Boolean ProcessCommand(Command c) //processes the command words typed by the user 
         {
             if (c.IsUnknown)
-            { return false; }
+            {
+                Console.Write("Input Valid ");
+                return false;
+            }
 
             if (c.CommandWord == "engine") //gets the engine as a command word
             {
@@ -41,26 +44,45 @@ namespace FatesMotel
                 }
                 else if (c.SecondWord == "goto") //takes in the phrase of goto adn this allows the use of room IDs
                 {
+                    bool vValidRoom = false;
                     foreach (Location room in vGame.GetRooms())
                     {
                         if (c.FourthWord == room.GetID().ToString()) //gets the room ID and then converts it into a string
                         {
                             vGame.MoveEngine(room);
-                            return true; //if true moves the engine to the correct room
+                            vValidRoom = true; ; //if true moves the engine to the correct room
                         }
                     }
+                    if (vValidRoom == true)
+                        {
+                            return true;
+                        }
+                    else
+                    {
+                        Console.Write("Invalid Room, Input Valid ");
+                        return false;
+                    }
                 }
-                else if (c.SecondWord=="recall") //allows the use of racall
+                else if (c.SecondWord == "recall") //allows the use of racall
                 {
                     vGame.MoveEngine(vGame.GetRooms().ElementAt(0));
                 }
-                else if (c.SecondWord=="refill") //allows the use of refill
+                else if (c.SecondWord == "refill") //allows the use of refill
                 {
                     vGame.EngineRefill();
                 }
-                else { return false; } //this will then refill the engine 
+                else if (c.SecondWord == "help")
+                {
+                    vGame.EngineHelp(); 
+                    return true;
+                }
+                else
+                {
+                    Console.Write("Input Valid ");
+                    return false;
+                } 
             }
-            else if(c.CommandWord == "room")
+            else if (c.CommandWord == "room")
             {
                 if (c.SecondWord == "list") //gets room infomation
                 {
@@ -72,18 +94,36 @@ namespace FatesMotel
                     vGame.GameReport(); //gets a report on the actual game 
                     return true;
                 }
-                else { return false; }
+                else if (c.SecondWord == "help")
+                {
+                    vGame.RoomHelp(); //gets a report on the actual game 
+                    return true;
+                }
+                else
+                {
+                    Console.Write("Input Valid ");
+                    return false;
+                }
             }
-            else if (c.CommandWord == "clear"){
+            else if (c.CommandWord == "clear")
+            {
                 Console.Clear(); //This will then clear the text feild so it will then be showing a blank page
                 return true;
             }
-            else if (c.CommandWord == "quit"){ //if the command word of quit has been typed it will 
+            else if (c.CommandWord == "help")
+            {
+                Console.Clear();
+                vGame.Help();
+                return true;
+            }
+            else if (c.CommandWord == "quit")
+            { //if the command word of quit has been typed it will 
                 vGame.vGameOver = true; //set the game as game over 
                 Console.Clear(); //and then clear the screen to show the game has finished
                 vGame.End();
                 return true;
             }
+            Console.Write("Input Valid ");
             return false; 
         }
     }
